@@ -4,15 +4,7 @@
 import Link from "next/link";
 import { GoogleSpreadsheetService } from "./spreadsheet";
 import { Dispatch, useEffect, useState } from "react";
-
-// }
-
-async function hoge(params?: string) {
-  //   const pink = "#FEA1A1";
-  //   const spreadService = await GoogleSpreadsheetService.getInstance();
-  //   // スプレットシートのタイトルを取得
-  //   console.log(spreadService.getTitle())
-}
+import { GiNotebook } from "react-icons/gi";
 
 const fetchData = async (url: string, setName: any, setValues: any) => {
   try {
@@ -56,17 +48,24 @@ export default function Article({ params }: { params: { userId: string } }) {
         Ai Recipe
       </div>
       <div className="p-5">
-        <div>{name}さんの登録したレシピ</div>
+        <div className="flex items-end gap-2 text-lg font-bold text-black/80 pt-1 pb-3 px-3">
+          <div className="border-b px-1 h-full border-black/80">
+            {name}さんの登録したレシピ
+          </div>
+          <GiNotebook size={32}></GiNotebook>
+        </div>
 
-        {database.map((item, key) => {
-          return (
-            <div key={key}>
-              <Link href={params.userId + "/" + key}>{item[4]}</Link>
-
-              {/* {item[5]} */}
-            </div>
-          );
-        })}
+        <div className="bg-white/50 rounded-xl px-3 pb-3 pt-1 ">
+          {database.map((item, key) => {
+            return (
+              <Link href={params.userId + "/" + key} key={key}>
+                <div className="border-b-2 border-[#FEA1A1] border-double text-lg py-2 break-words">
+                  ・{item[4]}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

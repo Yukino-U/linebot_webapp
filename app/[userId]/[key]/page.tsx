@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { GoogleSpreadsheetService } from "../spreadsheet";
 import { Dispatch, useEffect, useState } from "react";
-
+import { GiCook } from "react-icons/gi";
 // }
 
 async function hoge(params?: string) {
@@ -67,14 +67,18 @@ export default function Article({
         </div>
       </Link>
 
-      <div className="p-5">
-        {" "}
+      <div className="p-3">
         {database.map((item, key) => {
           if (key == recipekey) {
             return (
-              <div key={key}>
-                <div>{item[4]}の作り方</div>
-                <div className="whitespace-pre-line">{item[5]}</div>
+              <div key={key} className="bg-white/50 rounded-lg p-3">
+                <div className="flex text-lg font-bold text-black/80 items-end pt-1">
+                  <div className="border-b border-b-black/80 border-double px-1">
+                    {item[4]} の作り方
+                  </div>
+                  <GiCook size={24}></GiCook>
+                </div>
+                <div className="whitespace-pre-line pb-1">{item[5]}</div>
               </div>
             );
           }
