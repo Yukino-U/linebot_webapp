@@ -29,7 +29,7 @@ const fetchData = async (url: string, setName: any, setValues: any) => {
     setName(disp_name);
     setValues(values);
     // console.log(disp_name + "foo");
-
+    // console.log(values[0])
     // return disp_name,values;
     //   return values;
   } catch (err) {
@@ -37,35 +37,47 @@ const fetchData = async (url: string, setName: any, setValues: any) => {
   }
 };
 
-export default function Article({ params }: { params: { userId: string } }) {
+export default function Article({
+  params,
+}: {
+  params: { userId: string; key: number };
+}) {
   console.log("fuga");
   const [name, setName] = useState("");
   const [database, setDatabase] = useState([[]]);
+  const recipekey: number = params.key;
   const url =
     "https://sheets.googleapis.com/v4/spreadsheets/1A0Atc9_5FyXO775Jpvu-aXwC72RWL-zUdboEGLfkFx4/values/" +
     params.userId +
     "?key=AIzaSyCWex2ftB2_kLwKd54Ywh_fhkAwGDh-164";
-
+  // console.log(recipekey)
   useEffect(() => {
     fetchData(url, setName, setDatabase);
   }, [url]);
+  console.log(database);
+  const how = database[recipekey];
+  console.log(how);
 
   return (
     <div>
-      <div className="bg-[#FEA1A1] h-20 text-white font-bold items-center flex text-2xl px-5">
-        Ai Recipe
-      </div>
+      <Link href={params.userId}>
+        {" "}
+        <div className="bg-[#FEA1A1] h-20 text-white font-bold items-center flex text-2xl px-5">
+          Ai Recipe
+        </div>
+      </Link>
+
       <div className="p-5">
-        <div>{name}さんの登録したレシピ</div>
-
+        {" "}
         {database.map((item, key) => {
-          return (
-            <div key={key}>
-              <Link href={params.userId + "/" + key}>{item[4]}</Link>
-
-              {/* {item[5]} */}
-            </div>
-          );
+          if (key == recipekey) {
+            return (
+              <div key={key}>
+                <div>{item[4]}の作り方</div>
+                <div className="whitespace-pre">{item[5]}</div>
+              </div>
+            );
+          }
         })}
       </div>
     </div>
