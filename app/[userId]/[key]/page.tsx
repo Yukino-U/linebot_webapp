@@ -2,7 +2,7 @@
 //   return <div>{params.userId}</div>;
 "use client";
 import Link from "next/link";
-import { GoogleSpreadsheetService } from "./spreadsheet";
+import { GoogleSpreadsheetService } from "../spreadsheet";
 import { Dispatch, useEffect, useState } from "react";
 
 // }
