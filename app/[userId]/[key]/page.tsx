@@ -78,7 +78,7 @@ export default function Article({
                   </div>
                   <GiCook size={24}></GiCook>
                 </div>
-                <div className="whitespace-pre-line pb-1">{item[5]}</div>
+                <div className="whitespace-pre-line py-2">{item[5]}</div>
               </div>
             );
           }

@@ -6,7 +6,12 @@ import { GoogleSpreadsheetService } from "./spreadsheet";
 import { Dispatch, useEffect, useState } from "react";
 import { GiNotebook } from "react-icons/gi";
 
-const fetchData = async (url: string, setName: any, setValues: any) => {
+const fetchData = async (
+  url: string,
+  setName: any,
+  setValues: any,
+  setNum: any
+) => {
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -20,6 +25,7 @@ const fetchData = async (url: string, setName: any, setValues: any) => {
     const disp_name = values[3][0];
     setName(disp_name);
     setValues(values);
+    setNum(values[5][0]);
     // console.log(disp_name + "foo");
 
     // return disp_name,values;
@@ -33,13 +39,14 @@ export default function Article({ params }: { params: { userId: string } }) {
   console.log("fuga");
   const [name, setName] = useState("");
   const [database, setDatabase] = useState([[]]);
+  const [num, setNum] = useState(0);
   const url =
     "https://sheets.googleapis.com/v4/spreadsheets/1A0Atc9_5FyXO775Jpvu-aXwC72RWL-zUdboEGLfkFx4/values/" +
     params.userId +
     "?key=AIzaSyCWex2ftB2_kLwKd54Ywh_fhkAwGDh-164";
 
   useEffect(() => {
-    fetchData(url, setName, setDatabase);
+    fetchData(url, setName, setDatabase, setNum);
   }, [url]);
 
   return (
@@ -57,13 +64,15 @@ export default function Article({ params }: { params: { userId: string } }) {
 
         <div className="bg-white/50 rounded-xl px-3 pb-3 pt-1 ">
           {database.map((item, key) => {
-            return (
-              <Link href={params.userId + "/" + key} key={key}>
-                <div className="border-b-2 border-[#FEA1A1] border-double text-lg py-2 break-words">
-                  ・{item[4]}
-                </div>
-              </Link>
-            );
+            if (num > key) {
+              return (
+                <Link href={params.userId + "/" + key} key={key}>
+                  <div className="border-b-2 border-[#FEA1A1] border-double text-lg py-2 break-words">
+                    ・{item[4]}
+                  </div>
+                </Link>
+              );
+            }
           })}
         </div>
       </div>
