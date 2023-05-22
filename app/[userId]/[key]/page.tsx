@@ -54,9 +54,9 @@ export default function Article({
   useEffect(() => {
     fetchData(url, setName, setDatabase);
   }, [url]);
-  console.log(database);
-  const how = database[recipekey];
-  console.log(how);
+//   console.log(database);
+//   const how = database[recipekey];
+//   console.log(how);
 
   return (
     <div>
@@ -74,7 +74,7 @@ export default function Article({
             return (
               <div key={key}>
                 <div>{item[4]}の作り方</div>
-                <div className="whitespace-pre">{item[5]}</div>
+                <div className="whitespace-pre-line">{item[5]}</div>
               </div>
             );
           }
