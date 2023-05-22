@@ -54,9 +54,9 @@ export default function Article({
   useEffect(() => {
     fetchData(url, setName, setDatabase);
   }, [url]);
-//   console.log(database);
-//   const how = database[recipekey];
-//   console.log(how);
+  //   console.log(database);
+  //   const how = database[recipekey];
+  //   console.log(how);
 
   return (
     <div>
