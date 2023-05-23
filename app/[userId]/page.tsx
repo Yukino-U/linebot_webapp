@@ -37,6 +37,7 @@ const fetchData = async (
     //   return values;
   } catch (err) {
     console.error(err);
+    setLoading(false);
   }
 };
 
